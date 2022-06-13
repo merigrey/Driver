@@ -1,0 +1,215 @@
+{
+	"info": {
+		"_postman_id": "d6c01258-f833-4535-90c4-e778b909884d",
+		"name": "Multiple Off requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21428617"
+	},
+	"item": [
+		{
+			"name": "2-hour Drive Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('status code is 201', function(){\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test('json success', function () {\r",
+							"    var jsonData = pm.response\r",
+							"    pm.expect(jsonData.status).to.deep.equal(\"CREATED\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8001/add/D&2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"add",
+						"D&2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "9-hour Off Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('status code is 201', function(){\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test('json success', function () {\r",
+							"    var jsonData = pm.response\r",
+							"    pm.expect(jsonData.status).to.deep.equal(\"CREATED\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8001/add/OFF&9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"add",
+						"OFF&9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3-hour Off Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('status code is 201', function(){\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test('json success', function () {\r",
+							"    var jsonData = pm.response\r",
+							"    pm.expect(jsonData.status).to.deep.equal(\"CREATED\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8001/add/OFF&3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"add",
+						"OFF&3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2-hour Off Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('status code is 201', function(){\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test('json success', function () {\r",
+							"    var jsonData = pm.response\r",
+							"    pm.expect(jsonData.status).to.deep.equal(\"CREATED\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8001/add/OFF&2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"add",
+						"OFF&2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Summary request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('status code is 200', function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"pm.test(\"verify json body\", function () {\r",
+							"    var testJson = JSON.parse('{\"DRIVE clock\":{\"hours\":\"0\",\"violationStatus\":\"OK\"},\"WORK clock\":{\"hours\":\"0\",\"violationStatus\":\"OK\"}}');\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.eql(testJson);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8001/summary",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"summary"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
