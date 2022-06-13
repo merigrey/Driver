@@ -26,11 +26,6 @@ WORK_CLOCK = Clock("WORK_CLOCK")
 
 
 class Driver(Resource):
-    def __init__(self):
-        print("I'VE STARTED")
-        # self.drive_clock = Clock("DRIVE_CLOCK")
-        # self.work_clock = Clock("WORK_CLOCK")
-
     def get(self):
         global DRIVE_CLOCK
         global WORK_CLOCK
@@ -55,11 +50,6 @@ class Driver(Resource):
             cursor = sqlconnection.cursor()
             cursor.execute("SELECT Count(*) FROM log")
             cursor.execute("INSERT INTO log (status, delta) values (?,?)", (status, delta_val))
-
-            # TODO delete (testing purposes)
-            cursor.execute("SELECT * FROM log")
-            print(cursor.fetchall())
-        # sqlconnection.commit()
         sqlconnection.close()
 
         return Response("{'success':'true'}", status=201, mimetype='application/json')
@@ -78,22 +68,20 @@ class Driver(Resource):
             cursor = sqlconnection.cursor()
             cursor.execute("SELECT * FROM log ORDER BY log_id DESC")
             latest = cursor.fetchall()
-            consec = 0
+            consec = delta
             for row in latest:
                 if row[1] == "OFF":
                     consec += row[2]
                 else:
                     break
             if consec > 10:
-                DRIVE_CLOCK.__init__()
-                WORK_CLOCK.__init__()
+                DRIVE_CLOCK.__init__("DRIVE_CLOCK")
+                WORK_CLOCK.__init__("WORK_CLOCK")
         self.calculate_status()
 
     def calculate_status(self):
         global DRIVE_CLOCK
         global WORK_CLOCK
-        print(str(DRIVE_CLOCK.timeValue))
-        print(str(WORK_CLOCK.timeValue))
         if DRIVE_CLOCK.timeValue > 11:
             DRIVE_CLOCK.violationStatus = "V"
         if WORK_CLOCK.timeValue > 14:
