@@ -1,7 +1,7 @@
 import json
 import sqlite3
 from sqlite3 import Error
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response
 from flask_restful import Resource, Api
 
 app = Flask(__name__)
@@ -13,19 +13,25 @@ class Driver(Resource):
         return jsonify({'message': 'hello'})
 
     def post(self, status, delta):
-        print(status + ' ' + str(delta))
+        statuses = ('D', 'W', 'OFF')
+        try:
+            delta_val = int(delta)
+        except ValueError:
+            return Response("{'error':'bad request'}", status=400, mimetype='application/json')
+        if status not in statuses:
+            return Response("{'error':'bad request'}", status=400, mimetype='application/json')
+
         sqlconnection = sqlite3.connect('res/driver.sqlite')
         cursor = sqlconnection.cursor()
         cursor.execute("SELECT Count(*) FROM log")
-        cursor.execute("INSERT INTO log (status, delta) values (?,?)", (status, delta))
+        cursor.execute("INSERT INTO log (status, delta) values (?,?)", (status, delta_val))
         sqlconnection.commit()
 
         # TODO delete (testing purposes)
         cursor.execute("SELECT * FROM log")
         print(cursor.fetchall())
 
-        # TODO correct HTTP response
-        return 201
+        return Response("{'success':'true'}", status=201, mimetype='application/json')
 
 api.add_resource(Driver, '/add/<status>&<delta>')
 try:
