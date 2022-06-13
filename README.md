@@ -45,3 +45,5 @@ A testing suite has been created to run in the Postman client. Collections of te
 2. **Example(1-4)** - test collections based on the example responses from the homework document
 3. **Multiple Off requests** - collection featuring separated time-off POST requests, checking that both clocks (DRIVE_CLOCK and WORK_CLOCK) were reset to 0 upon consecutive >10 hours of time off.
 
+Please note that you may need to restart the program between testing collections, as data is stored in DRIVE_CLOCK and WORK_CLOCK, where each collection assumes that values are 0.
+
