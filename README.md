@@ -21,9 +21,9 @@ It is recommended that you use an API platform, such as Postman, as browsers ten
 2. Use the following request formats:
     1. POST requests:
 
-    http://localhost:8001/add/<TYPE>&<DELTA>
-    where <TYPE> is D (Drive), W (Work), or OFF
-    and <DELTA> is the time spent in that status
+    http://localhost:8001/add/TYPE&DELTA
+    where TYPE is D (Drive), W (Work), or OFF
+    and DELTA is the time spent in that status
 
     2. GET requests:
 
@@ -41,7 +41,7 @@ Successful GET requests will return a 200 status code, with a JSON response body
 
 A testing suite has been created to run in the Postman client. Collections of tests are in the Driver\tests folder. The following test collections have been created:
 
-1. **Bad Requests** - tests that bad requests (where <TYPE> and <DELTA> params are not of the correct type/format) return 400 status codes.
+1. **Bad Requests** - tests that bad requests (where TYPE and DELTA params are not of the correct type/format) return 400 status codes.
 2. **Example(1-4)** - test collections based on the example responses from the homework document
 3. **Multiple Off requests** - collection featuring separated time-off POST requests, checking that both clocks (DRIVE_CLOCK and WORK_CLOCK) were reset to 0 upon consecutive >10 hours of time off.
 
