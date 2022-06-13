@@ -101,4 +101,4 @@ except Error as e:
     print(f"sqlite3 error '{e}")
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8001)
+    app.run(port=8001)
